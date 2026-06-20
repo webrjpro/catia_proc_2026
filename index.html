@@ -10,6 +10,7 @@
     <meta name="theme-color" content="#071d2b" />
     <title>PGE/RJ — Estratégia de Aprovação</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="enhancements.css" />
   </head>
   <body>
     <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
@@ -31,6 +32,13 @@
       <symbol id="i-external" viewBox="0 0 24 24"><path d="M13 5h6v6M19 5l-9 9M11 7H5v12h12v-6"/></symbol>
       <symbol id="i-alert" viewBox="0 0 24 24"><path d="m12 3 10 18H2zM12 9v5m0 3v1"/></symbol>
       <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6M4 4v6h6"/></symbol>
+      <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 3c-4 0-8 6-8 10a8 8 0 1 0 16 0c0-4-4-10-8-10zm0 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></symbol>
+      <symbol id="i-cards" viewBox="0 0 24 24"><path d="M4 6h12v12H4zM8 4h12v12"/></symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4zM19 9a5 5 0 0 1 0 6M15.5 7.5a9 9 0 0 1 0 9"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 17v2h16v-2"/></symbol>
+      <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V3m0 0-4 4m4-4 4 4M4 17v2h16v-2"/></symbol>
+      <symbol id="i-keyboard" viewBox="0 0 24 24"><path d="M2 6h20v12H2zM6 10h1M10 10h1M14 10h1M18 10h1M7 14h10"/></symbol>
+      <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 2c-2 4-6 6-6 11a6 6 0 1 0 12 0c0-5-4-7-6-11z"/></symbol>
     </svg>
 
     <div class="mobile-scrim" data-close-menu></div>
@@ -72,6 +80,9 @@
         <a class="nav-link" href="#escrita"><svg><use href="#i-pen"></use></svg><span>Laboratório de escrita</span></a>
         <a class="nav-link" href="#simulados"><svg><use href="#i-timer"></use></svg><span>Simulados</span></a>
         <a class="nav-link" href="#revisao"><svg><use href="#i-check"></use></svg><span>Revisão final</span></a>
+        <p class="nav-label">Ferramentas</p>
+        <a class="nav-link" href="#mapas-mentais"><svg><use href="#i-map"></use></svg><span>Mapas mentais</span></a>
+        <a class="nav-link" href="#flashcards"><svg><use href="#i-cards"></use></svg><span>Flashcards</span></a>
         <p class="nav-label">Acervo</p>
         <a class="nav-link" href="#apostila"><svg><use href="#i-file"></use></svg><span>Apostila integral</span></a>
         <a class="nav-link" href="#fontes"><svg><use href="#i-external"></use></svg><span>Fontes e atualização</span></a>
@@ -108,6 +119,8 @@
           <article><strong>6</strong><span>disciplinas<br />em todos os ciclos</span></article>
           <article><strong>24</strong><span>semanas no<br />plano completo</span></article>
         </div>
+
+        <div id="dashboard-panel"></div>
 
         <div class="section-heading split-heading">
           <div><span class="section-index">01</span><p class="kicker">Leitura estratégica</p><h2>O que separa conteúdo de aprovação</h2></div>
@@ -301,9 +314,38 @@
         </div>
         <div class="review-summary">
           <div class="donut" id="review-donut"><span><strong id="review-percent">0%</strong><small>concluído</small></span></div>
-          <div><p class="kicker">Leitura honesta</p><h2 id="review-status">Diagnóstico inicial</h2><p id="review-status-copy">Seu progresso ficará salvo neste navegador.</p></div>
+          <div>
+            <p class="kicker">Leitura honesta</p><h2 id="review-status">Diagnóstico inicial</h2><p id="review-status-copy">Seu progresso ficará salvo neste navegador.</p>
+          </div>
+        </div>
+        <div id="export-import-panel">
         </div>
         <div id="checklist-groups" class="checklist-groups"></div>
+      </section>
+
+      <section id="mapas-mentais" class="view" data-title="Mapas mentais">
+        <div class="page-intro page-intro-row">
+          <div>
+            <p class="kicker">Visualização estratégica</p>
+            <h1>Mapas mentais</h1>
+            <p>Visualize a estrutura de cada disciplina, seus eixos de domínio e as conexões temáticas que a banca explora.</p>
+          </div>
+        </div>
+        <div class="mindmap-tabs" id="mindmap-tabs" role="tablist" aria-label="Disciplinas — mapa mental"></div>
+        <div class="mindmap-container" id="mindmap-container"></div>
+      </section>
+
+      <section id="flashcards" class="view" data-title="Flashcards">
+        <div class="page-intro page-intro-row">
+          <div>
+            <p class="kicker">Repetição espaçada</p>
+            <h1>Flashcards inteligentes</h1>
+            <p>Revise teses, fundamentos e conceitos com repetição espaçada baseada no algoritmo SM-2. Cards que você erra aparecem mais vezes.</p>
+          </div>
+          <div class="flashcard-stats" id="flashcard-stats"></div>
+        </div>
+        <div class="flashcard-controls" id="flashcard-controls"></div>
+        <div class="flashcard-stage" id="flashcard-stage"></div>
       </section>
 
       <section id="apostila" class="view" data-title="Apostila integral">
@@ -357,5 +399,8 @@
 
     <script src="apostila-content.js"></script>
     <script src="app.js"></script>
+    <script src="enhancements.js"></script>
+    <script src="mindmaps.js"></script>
+    <script src="flashcards.js"></script>
   </body>
 </html>
